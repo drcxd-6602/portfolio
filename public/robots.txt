@@ -1,0 +1,10 @@
+# robots.txt for portfolio.darshancodes.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://portfolio.darshancodes.com/sitemap.xml
+
+# Crawl delay (optional, be nice to servers)
+Crawl-delay: 1
