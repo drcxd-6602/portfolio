@@ -1,7 +1,96 @@
+import { lazy, Suspense, useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+// Lazy load syntax highlighter with only common languages
+const SyntaxHighlighter = lazy(() =>
+  import('react-syntax-highlighter/dist/esm/prism-light').then((mod) => ({
+    default: mod.default,
+  }))
+);
+
+// Import only common languages to reduce bundle size
+const languageImports = {
+  javascript: () => import('react-syntax-highlighter/dist/esm/languages/prism/javascript'),
+  typescript: () => import('react-syntax-highlighter/dist/esm/languages/prism/typescript'),
+  jsx: () => import('react-syntax-highlighter/dist/esm/languages/prism/jsx'),
+  tsx: () => import('react-syntax-highlighter/dist/esm/languages/prism/tsx'),
+  css: () => import('react-syntax-highlighter/dist/esm/languages/prism/css'),
+  python: () => import('react-syntax-highlighter/dist/esm/languages/prism/python'),
+  bash: () => import('react-syntax-highlighter/dist/esm/languages/prism/bash'),
+  json: () => import('react-syntax-highlighter/dist/esm/languages/prism/json'),
+  markdown: () => import('react-syntax-highlighter/dist/esm/languages/prism/markdown'),
+  sql: () => import('react-syntax-highlighter/dist/esm/languages/prism/sql'),
+  java: () => import('react-syntax-highlighter/dist/esm/languages/prism/java'),
+  go: () => import('react-syntax-highlighter/dist/esm/languages/prism/go'),
+  rust: () => import('react-syntax-highlighter/dist/esm/languages/prism/rust'),
+  yaml: () => import('react-syntax-highlighter/dist/esm/languages/prism/yaml'),
+  docker: () => import('react-syntax-highlighter/dist/esm/languages/prism/docker'),
+  html: () => import('react-syntax-highlighter/dist/esm/languages/prism/markup'),
+  xml: () => import('react-syntax-highlighter/dist/esm/languages/prism/markup'),
+};
+
+const themePromise = import(
+  'react-syntax-highlighter/dist/esm/styles/prism/one-dark'
+).then((mod) => mod.default);
+
+// Simple code block fallback
+const CodeFallback = ({ children }) => (
+  <pre className="bg-slate-800 text-slate-100 rounded-lg p-4 overflow-x-auto my-4 text-sm">
+    <code>{children}</code>
+  </pre>
+);
+
+function LazyCodeBlock({ language, children }) {
+  const [theme, setTheme] = useState(null);
+  const [SyntaxHL, setSyntaxHL] = useState(null);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+
+    Promise.all([
+      themePromise,
+      import('react-syntax-highlighter/dist/esm/prism-light'),
+      languageImports[language]?.() || Promise.resolve(null),
+    ]).then(([loadedTheme, syntaxMod, langMod]) => {
+      if (!mounted) return;
+
+      if (langMod) {
+        syntaxMod.default.registerLanguage(language, langMod.default);
+      }
+
+      setTheme(loadedTheme);
+      setSyntaxHL(() => syntaxMod.default);
+      setReady(true);
+    });
+
+    return () => { mounted = false; };
+  }, [language]);
+
+  if (!ready || !SyntaxHL) {
+    return <CodeFallback>{children}</CodeFallback>;
+  }
+
+  return (
+    <SyntaxHL
+      style={theme}
+      language={language}
+      PreTag="div"
+      className="rounded-lg !my-4 text-sm"
+    >
+      {children}
+    </SyntaxHL>
+  );
+}
+
+function CodeBlock({ language, children }) {
+  return (
+    <Suspense fallback={<CodeFallback>{children}</CodeFallback>}>
+      <LazyCodeBlock language={language}>{children}</LazyCodeBlock>
+    </Suspense>
+  );
+}
 
 export default function MarkdownRenderer({ content }) {
   return (
@@ -9,19 +98,12 @@ export default function MarkdownRenderer({ content }) {
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-          // Code blocks with syntax highlighting
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
-              <SyntaxHighlighter
-                style={oneDark}
-                language={match[1]}
-                PreTag="div"
-                className="rounded-lg !my-4"
-                {...props}
-              >
+              <CodeBlock language={match[1]}>
                 {String(children).replace(/\n$/, '')}
-              </SyntaxHighlighter>
+              </CodeBlock>
             ) : (
               <code className={className} {...props}>
                 {children}
@@ -29,7 +111,6 @@ export default function MarkdownRenderer({ content }) {
             );
           },
 
-          // Images with styling
           img({ src, alt }) {
             return (
               <img
@@ -41,7 +122,6 @@ export default function MarkdownRenderer({ content }) {
             );
           },
 
-          // Headings with anchor links
           h1({ children }) {
             const id = children
               .toString()
@@ -79,7 +159,6 @@ export default function MarkdownRenderer({ content }) {
             );
           },
 
-          // Links open in new tab for external URLs
           a({ href, children }) {
             const isExternal = href && href.startsWith('http');
             return (
@@ -93,7 +172,6 @@ export default function MarkdownRenderer({ content }) {
             );
           },
 
-          // Blockquotes styling
           blockquote({ children }) {
             return (
               <blockquote className="border-l-4 border-primary-500 pl-4 italic text-slate-600 dark:text-slate-400">
@@ -102,7 +180,6 @@ export default function MarkdownRenderer({ content }) {
             );
           },
 
-          // Tables styling
           table({ children }) {
             return (
               <div className="overflow-x-auto my-4">

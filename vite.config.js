@@ -11,4 +11,16 @@ export default defineConfig({
     },
   },
   assetsInclude: ["**/*.md"],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          router: ["react-router-dom"],
+          markdown: ["react-markdown", "remark-gfm"],
+          icons: ["lucide-react"],
+        },
+      },
+    },
+  },
 });
