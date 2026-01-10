@@ -69,7 +69,8 @@ export const siteConfig = {
     {
       id: "project-1",
       title: "Sniplynx",
-      description: "A mordern URL shortner with rich analytics and buisness insights",
+      description:
+        "A mordern URL shortner with rich analytics and buisness insights",
       image: "/images/projects/weather.jpg",
       technologies: ["React", "Golang", "Gin", "PostgreSQL", "Docker", "Redis"],
       liveUrl: "https://example.com",
