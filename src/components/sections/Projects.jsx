@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink, Github, Construction } from "lucide-react";
+import { ExternalLink, Github, Hammer } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
 import {
   Section,
@@ -26,20 +26,20 @@ function ProjectCard({ project }) {
         />
         {/* Overlay - always visible for underDevelopment, hover for others */}
         <div
-          className={`absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent transition-opacity duration-300 flex flex-col items-center justify-center ${
+          className={`absolute inset-0 transition-opacity duration-300 flex flex-col items-center justify-center ${
             project.underDevelopment
-              ? "opacity-100"
-              : "opacity-0 group-hover:opacity-100"
+              ? "opacity-100 bg-slate-900/90"
+              : "opacity-0 group-hover:opacity-100 bg-gradient-to-t from-slate-900/80 to-transparent"
           }`}
         >
           {project.underDevelopment && (
-            <div className="flex items-center gap-2 text-white font-medium mb-4">
-              <Construction size={20} />
+            <div className="flex items-center gap-2 text-white font-semibold text-lg mb-4">
+              <Hammer size={24} />
               Under Development
             </div>
           )}
           <div className="flex gap-3">
-            {project.liveUrl && (
+            {project.liveUrl && !project.underDevelopment && (
               <a
                 href={project.liveUrl}
                 target="_blank"
