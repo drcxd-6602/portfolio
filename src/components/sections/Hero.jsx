@@ -5,22 +5,23 @@ import {
   Mail,
   Download,
   ArrowDown,
+  Eye,
+  MapPin,
 } from "lucide-react";
 import { siteConfig } from "@/config/site.config";
 import { Button } from "@/components/common";
 
-const socialIcons = {
-  github: Github,
-  linkedin: Linkedin,
-  twitter: Twitter,
-  email: Mail,
-};
+const socialLinks = [
+  { key: "github", icon: Github, label: "GitHub" },
+  { key: "linkedin", icon: Linkedin, label: "LinkedIn" },
+  { key: "twitter", icon: Twitter, label: "Twitter" },
+];
 
 export default function Hero() {
   const { personal, social } = siteConfig;
 
-  const scrollToAbout = () => {
-    const element = document.querySelector("#about");
+  const scrollToSkills = () => {
+    const element = document.querySelector("#skills");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -54,52 +55,75 @@ export default function Hero() {
               {personal.title}
             </p>
             <p
-              className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-lg mx-auto md:mx-0 animate-slide-up"
+              className="text-lg text-slate-600 dark:text-slate-400 mb-6 max-w-lg mx-auto md:mx-0 animate-slide-up"
               style={{ animationDelay: "0.2s" }}
             >
               {personal.bio}
             </p>
 
-            {/* CTA Buttons */}
+            {/* Location & Email Info */}
             <div
-              className="flex flex-wrap gap-4 justify-center md:justify-start mb-8 animate-slide-up"
-              style={{ animationDelay: "0.3s" }}
+              className="flex flex-wrap gap-4 justify-center md:justify-start mb-6 animate-slide-up"
+              style={{ animationDelay: "0.25s" }}
             >
-              <Button
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .querySelector("#contact")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
+              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+                <MapPin size={18} className="text-primary-600 dark:text-primary-400" />
+                <span>{personal.location}</span>
+              </div>
+              <a
+                href={`mailto:${personal.email}`}
+                className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
               >
-                Get in Touch
-              </Button>
-              <Button href={personal.resumeFile} variant="outline" download>
-                <Download size={18} />
-                Download Resume
-              </Button>
+                <Mail size={18} className="text-primary-600 dark:text-primary-400" />
+                <span>{personal.email}</span>
+              </a>
             </div>
 
-            {/* Social Links */}
+            {/* CTA Buttons */}
             <div
-              className="flex gap-4 justify-center md:justify-start animate-slide-up"
+              className="flex flex-wrap gap-4 justify-center md:justify-start mb-6 animate-slide-up"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <Button href={`mailto:${personal.email}`}>
+                <Mail size={18} />
+                Email Me
+              </Button>
+              {personal.resumePreviewUrl ? (
+                <Button
+                  href={personal.resumePreviewUrl}
+                  variant="outline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Eye size={18} />
+                  View Resume
+                </Button>
+              ) : (
+                <Button href={personal.resumeFile} variant="outline" download>
+                  <Download size={18} />
+                  Download Resume
+                </Button>
+              )}
+            </div>
+
+            {/* Social Links - Labeled Buttons */}
+            <div
+              className="flex flex-wrap gap-3 justify-center md:justify-start animate-slide-up"
               style={{ animationDelay: "0.4s" }}
             >
-              {Object.entries(social).map(([key, url]) => {
-                const Icon = socialIcons[key];
-                if (!Icon || !url) return null;
+              {socialLinks.map(({ key, icon: Icon, label }) => {
+                const url = social[key];
+                if (!url) return null;
                 return (
                   <a
                     key={key}
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-200"
-                    aria-label={key}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-primary-100 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 rounded-full font-medium transition-all duration-200"
                   >
-                    <Icon size={24} />
+                    <Icon size={18} />
+                    {label}
                   </a>
                 );
               })}
@@ -130,7 +154,7 @@ export default function Hero() {
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
           <button
-            onClick={scrollToAbout}
+            onClick={scrollToSkills}
             className="p-2 text-slate-400 hover:text-primary-500 transition-colors"
             aria-label="Scroll to about section"
           >

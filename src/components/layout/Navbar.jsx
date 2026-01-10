@@ -79,6 +79,16 @@ export default function Navbar() {
                 >
                   {item.label}
                 </Link>
+              ) : item.type === 'external' ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
+                >
+                  {item.label}
+                </a>
               ) : (
                 <a
                   key={item.label}
@@ -135,6 +145,16 @@ export default function Navbar() {
                 >
                   {item.label}
                 </Link>
+              ) : item.type === 'external' ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg font-medium transition-colors"
+                >
+                  {item.label}
+                </a>
               ) : (
                 <a
                   key={item.label}

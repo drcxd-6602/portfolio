@@ -1,7 +1,13 @@
-import { useState } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
-import { siteConfig } from '@/config/site.config';
-import { Section, SectionTitle, Card, Badge, Button } from '@/components/common';
+import { useState } from "react";
+import { ExternalLink, Github, Construction } from "lucide-react";
+import { siteConfig } from "@/config/site.config";
+import {
+  Section,
+  SectionTitle,
+  Card,
+  Badge,
+  Button,
+} from "@/components/common";
 
 function ProjectCard({ project }) {
   return (
@@ -13,11 +19,25 @@ function ProjectCard({ project }) {
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           onError={(e) => {
-            e.target.src = `https://placehold.co/600x400/a855f7/ffffff?text=${encodeURIComponent(project.title)}`;
+            e.target.src = `https://placehold.co/600x400/a855f7/ffffff?text=${encodeURIComponent(
+              project.title
+            )}`;
           }}
         />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+        {/* Overlay - always visible for underDevelopment, hover for others */}
+        <div
+          className={`absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent transition-opacity duration-300 flex flex-col items-center justify-center ${
+            project.underDevelopment
+              ? "opacity-100"
+              : "opacity-0 group-hover:opacity-100"
+          }`}
+        >
+          {project.underDevelopment && (
+            <div className="flex items-center gap-2 text-white font-medium mb-4">
+              <Construction size={20} />
+              Under Development
+            </div>
+          )}
           <div className="flex gap-3">
             {project.liveUrl && (
               <a
@@ -69,8 +89,11 @@ export default function Projects() {
   const { projects } = siteConfig;
   const [showAll, setShowAll] = useState(false);
 
-  const displayedProjects = showAll ? projects : projects.filter((p) => p.featured);
-  const hasMoreProjects = projects.length > projects.filter((p) => p.featured).length;
+  const displayedProjects = showAll
+    ? projects
+    : projects.filter((p) => p.featured);
+  const hasMoreProjects =
+    projects.length > projects.filter((p) => p.featured).length;
 
   return (
     <Section id="projects" background="alternate">
@@ -87,11 +110,8 @@ export default function Projects() {
 
       {hasMoreProjects && (
         <div className="text-center mt-12">
-          <Button
-            variant="outline"
-            onClick={() => setShowAll(!showAll)}
-          >
-            {showAll ? 'Show Less' : 'View All Projects'}
+          <Button variant="outline" onClick={() => setShowAll(!showAll)}>
+            {showAll ? "Show Less" : "View All Projects"}
           </Button>
         </div>
       )}

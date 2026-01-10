@@ -12,12 +12,11 @@ export const siteConfig = {
     title: "Software Developer",
     email: "darshan.chaudhari.6602@gmail.com",
     location: "Pune, India",
-    bio: "Passionate developer with expertise in building modern web applications. I love creating elegant solutions to complex problems.",
-    longBio: `Software Developer with 2+ years of experience specializing in C# and .NET (ASP.NET Core), building scalable, high-performance backend systems and APIs. 
-    Strong hands-on experience across the full stack, including React, JavaScript, TypeScript, Node.js, and Golang, with a solid foundation in system design and distributed application concepts. 
-    Proficient in working with relational databases such as PostgreSQL and MySQL, as well as MongoDB for NoSQL use cases. Leverage modern AI tools to accelerate development, improve code quality, and maintain production-ready standards. Open to impactful engineering opportunities.`,
+    bio: "Software Developer with 2+ years of experience building scalable backend systems with C#, .NET, and ASP.NET Core. Full-stack proficient in React, TypeScript, Node.js, and Golang, with expertise in PostgreSQL, MySQL, and MongoDB. Passionate about system design, clean architecture, and leveraging AI tools to deliver production-ready solutions.",
     profileImage: "/images/profile.jpeg",
     resumeFile: "/resume.pdf",
+    resumePreviewUrl:
+      "https://drive.google.com/file/d/1OfIP2oV3EDx0VKE8PMgDbXLFqcQawn2B/view?usp=drive_link", // Google Drive public link (e.g., "https://drive.google.com/file/d/YOUR_FILE_ID/view")
   },
 
   // Social Links
@@ -45,9 +44,8 @@ export const siteConfig = {
       items: [
         { name: "C#", level: 80 },
         { name: ".Net Core", level: 80 },
-        { name: ".Net MVC", level: 75 },
         { name: "Golang", level: 70 },
-        { name: "Node/Typescript", level: 85 },
+        { name: "Node", level: 85 },
         { name: "SQL", level: 90 },
         { name: "PostgreSQL", level: 75 },
         { name: "MongoDB", level: 70 },
@@ -71,13 +69,13 @@ export const siteConfig = {
     {
       id: "project-1",
       title: "Sniplynx",
-      description:
-        "A weather application with location-based forecasts and interactive maps.",
+      description: "A mordern URL shortner with rich analytics and buisness insights",
       image: "/images/projects/weather.jpg",
-      technologies: ["React", "OpenWeather API", "Mapbox"],
+      technologies: ["React", "Golang", "Gin", "PostgreSQL", "Docker", "Redis"],
       liveUrl: "https://example.com",
       githubUrl: "https://github.com/yourusername/weather",
       featured: true,
+      underDevelopment: true,
     },
     {
       id: "project-2",
@@ -102,7 +100,17 @@ export const siteConfig = {
 
         Utilizing frontend frameworks like Blazor and React to design data driven UI dashboards.
         Contributing to system design and architectural decisions, with a focus on scalability and long-term maintainability.`,
-      technologies: ["React", "TypeScript", "Node.js", "AWS"],
+      technologies: [
+        "C#",
+        "ASP.NET Core",
+        "Blazor",
+        "React",
+        "TypeScript",
+        "EF Core",
+        "LINQ",
+        "NUnit / xUnit",
+        "SQL",
+      ],
     },
     {
       company: "Sarvaha Systems Pvt. Ltd.",
@@ -114,12 +122,12 @@ export const siteConfig = {
         Designed SQL-based data normalization and quality pipelines, cutting processing time by 25% and storage usage by 50%.
         `,
       technologies: [
-        "C#",
-        ".Net core",
-        "ASP.Net core MVC",
-        "React",
-        "Typescript",
+        "Node.js",
+        "TypeScript",
+        "MongoDB",
         "SQL",
+        "dbt",
+        "GCP / BigQuery",
       ],
     },
   ],

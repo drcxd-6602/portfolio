@@ -1,71 +1,80 @@
-import { useEffect, useState, useRef } from 'react';
-import { siteConfig } from '@/config/site.config';
-import { Section, SectionTitle, Card } from '@/components/common';
+import { siteConfig } from "@/config/site.config";
+import { Section, SectionTitle, Card } from "@/components/common";
 
-function SkillBar({ skill, isVisible }) {
-  return (
-    <div className="mb-4 last:mb-0">
-      <div className="flex justify-between mb-2">
-        <span className="text-slate-700 dark:text-slate-300 font-medium">
-          {skill.name}
-        </span>
-        <span className="text-slate-500 dark:text-slate-400 text-sm">
-          {skill.level}%
-        </span>
-      </div>
-      <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-gradient-to-r from-primary-500 to-primary-600 rounded-full transition-all duration-1000 ease-out"
-          style={{ width: isVisible ? `${skill.level}%` : '0%' }}
-        />
-      </div>
-    </div>
-  );
-}
+// Skill to Devicon mapping
+const skillIcons = {
+  React: "react/react-original",
+  Javascript: "javascript/javascript-original",
+  TypeScript: "typescript/typescript-original",
+  Blazor: "blazor/blazor-original",
+  "Tailwind CSS": "tailwindcss/tailwindcss-original",
+  "C#": "csharp/csharp-original",
+  "ASP .Net Core": "dotnetcore/dotnetcore-original",
+  ".Net MVC": "dot-net/dot-net-original",
+  Golang: "go/go-original-wordmark",
+  Node: "nodejs/nodejs-original",
+  SQL: "azuresqldatabase/azuresqldatabase-original",
+  PostgreSQL: "postgresql/postgresql-original",
+  MongoDB: "mongodb/mongodb-original",
+  Redis: "redis/redis-original",
+  "MCP servers": "python/python-original", // placeholder
+  Git: "git/git-original",
+  Docker: "docker/docker-original",
+  "CI/CD": "githubactions/githubactions-original",
+  Linux: "linux/linux-original",
+};
+
+const getIconUrl = (skillName) => {
+  const iconPath = skillIcons[skillName];
+  if (!iconPath) return null;
+  return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${iconPath}.svg`;
+};
 
 export default function Skills() {
   const { skills } = siteConfig;
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <Section id="skills">
-      <div ref={sectionRef}>
-        <SectionTitle
-          title="Skills & Technologies"
-          subtitle="Technologies I work with on a daily basis"
-        />
+      <SectionTitle
+        title="Skills & Technologies"
+        subtitle="Technologies I work with on a daily basis"
+      />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skills.map((category, index) => (
-            <Card key={category.category} className="animate-slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
-                {category.category}
-              </h3>
-              {category.items.map((skill) => (
-                <SkillBar key={skill.name} skill={skill} isVisible={isVisible} />
-              ))}
-            </Card>
-          ))}
-        </div>
+      <div className="grid md:grid-cols-3 gap-6">
+        {skills.map((category, index) => (
+          <Card
+            key={category.category}
+            className="animate-slide-up"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
+              {category.category}
+            </h3>
+            <div className="grid grid-cols-2 gap-2">
+              {category.items.map((skill) => {
+                const iconUrl = getIconUrl(skill.name);
+                return (
+                  <span
+                    key={skill.name}
+                    className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium"
+                  >
+                    {iconUrl && (
+                      <img
+                        src={iconUrl}
+                        alt={skill.name}
+                        className="w-4 h-4"
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                        }}
+                      />
+                    )}
+                    {skill.name}
+                  </span>
+                );
+              })}
+            </div>
+          </Card>
+        ))}
       </div>
     </Section>
   );
