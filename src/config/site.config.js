@@ -16,7 +16,7 @@ export const siteConfig = {
     profileImage: "/images/profile.jpeg",
     resumeFile: "/resume.pdf",
     resumePreviewUrl:
-      "https://drive.google.com/file/d/1OfIP2oV3EDx0VKE8PMgDbXLFqcQawn2B/view?usp=drive_link", // Google Drive public link (e.g., "https://drive.google.com/file/d/YOUR_FILE_ID/view")
+      "https://drive.google.com/drive/folders/1sUlGrZtL_ex5DqKSKv4IRRRM5nc4kIht", // Google Drive public link (e.g., "https://drive.google.com/file/d/YOUR_FILE_ID/view")
   },
 
   // Social Links
