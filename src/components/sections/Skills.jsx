@@ -3,22 +3,36 @@ import { Section, SectionTitle, Card } from "@/components/common";
 
 // Skill to Devicon mapping
 const skillIcons = {
-  React: "react/react-original",
-  Javascript: "javascript/javascript-original",
-  TypeScript: "typescript/typescript-original",
-  Blazor: "blazor/blazor-original",
-  "Tailwind CSS": "tailwindcss/tailwindcss-original",
+  // Languages
   "C#": "csharp/csharp-original",
-  ".Net Core": "dotnetcore/dotnetcore-original",
-  Golang: "go/go-original-wordmark",
-  Node: "nodejs/nodejs-original",
+  Go: "go/go-original-wordmark",
+  TypeScript: "typescript/typescript-original",
+  JavaScript: "javascript/javascript-original",
   SQL: "azuresqldatabase/azuresqldatabase-original",
+  Bash: "bash/bash-original",
+  "C++": "cplusplus/cplusplus-original",
+
+  // Web Frameworks
+  ".NET Core": "dotnetcore/dotnetcore-original",
+  "ASP.NET Core": "dotnetcore/dotnetcore-original",
+  "EF Core": "dot-net/dot-net-original",
+  LINQ: "dot-net/dot-net-original",
+  Blazor: "blazor/blazor-original",
+  "Node.js": "nodejs/nodejs-original",
+  "Express.js": "express/express-original",
+
+  // Databases
+  "MS SQL Server": "microsoftsqlserver/microsoftsqlserver-plain",
   PostgreSQL: "postgresql/postgresql-original",
+  MySQL: "mysql/mysql-original",
   MongoDB: "mongodb/mongodb-original",
   Redis: "redis/redis-original",
-  "MCP servers": "python/python-original", // placeholder
-  Git: "git/git-original",
+  "Google BigQuery": "googlecloud/googlecloud-original",
+
+  // Tools & Platforms
   Docker: "docker/docker-original",
+  Git: "git/git-original",
+  GitHub: "github/github-original",
   "CI/CD": "githubactions/githubactions-original",
   Linux: "linux/linux-original",
 };

@@ -12,7 +12,7 @@ export const siteConfig = {
     title: "Software Developer",
     email: "darshan.chaudhari.6602@gmail.com",
     location: "Pune, India",
-    bio: "Software Developer with 2+ years of experience building scalable backend systems with C#, .NET, and ASP.NET Core. Full-stack proficient in React, TypeScript, Node.js, and Golang, with expertise in PostgreSQL, MySQL, and MongoDB. Passionate about system design, clean architecture, and leveraging AI tools to deliver production-ready solutions.",
+    bio: "Results-driven Software Developer with 2+ years of experience delivering high-performance, scalable backend systems using C#, .NET 8, ASP.NET Core, gRPC, GraphQL, and actor-based architectures. Proven expertise building real-time device monitoring platforms, multi-threaded microservices, Blazor dashboards, and high-throughput REST/GraphQL APIs. Strong command of Dapper, Entity Framework Core, clean architecture, SOLID principles, and performance optimization. Additional hands-on experience with Node.js/TypeScript microservices and Go for data pipelines.",
     profileImage: "/images/profile.jpeg",
     resumeFile: "/resume.pdf",
     resumePreviewUrl:
@@ -30,34 +30,56 @@ export const siteConfig = {
   // Skills & Technologies
   skills: [
     {
-      category: "Frontend",
+      category: "Languages",
       items: [
-        { name: "React", level: 90 },
-        { name: "Javascript", level: 85 },
+        { name: "C#", level: 85 },
+        { name: "Go", level: 70 },
         { name: "TypeScript", level: 85 },
-        { name: "Blazor", level: 85 },
-        { name: "Tailwind CSS", level: 90 },
-      ],
-    },
-    {
-      category: "Backend",
-      items: [
-        { name: "C#", level: 80 },
-        { name: ".Net Core", level: 80 },
-        { name: "Golang", level: 70 },
-        { name: "Node", level: 85 },
+        { name: "JavaScript", level: 85 },
         { name: "SQL", level: 90 },
-        { name: "PostgreSQL", level: 75 },
-        { name: "MongoDB", level: 70 },
-        { name: "Redis", level: 85 },
-        { name: "MCP servers", level: 70 },
+        { name: "Bash", level: 75 },
+        { name: "C++", level: 70 },
       ],
     },
     {
-      category: "Tools & DevOps",
+      category: "Web Frameworks",
       items: [
-        { name: "Git", level: 90 },
+        { name: ".NET Core", level: 85 },
+        { name: "ASP.NET Core", level: 85 },
+        { name: "EF Core", level: 80 },
+        { name: "LINQ", level: 85 },
+        { name: "Blazor", level: 85 },
+        { name: "Node.js", level: 85 },
+        { name: "Express.js", level: 80 },
+      ],
+    },
+    {
+      category: "Databases",
+      items: [
+        { name: "MS SQL Server", level: 90 },
+        { name: "PostgreSQL", level: 75 },
+        { name: "MySQL", level: 75 },
+        { name: "MongoDB", level: 75 },
+        { name: "Redis", level: 80 },
+        { name: "Google BigQuery", level: 65 },
+      ],
+    },
+    {
+      category: "Design & Systems",
+      items: [
+        { name: "SOLID Principles", level: 90 },
+        { name: "Design Patterns", level: 85 },
+        { name: "Microservices", level: 85 },
+        { name: "LLD", level: 80 },
+        { name: "HLD", level: 80 },
+      ],
+    },
+    {
+      category: "Tools & Platforms",
+      items: [
         { name: "Docker", level: 75 },
+        { name: "Git", level: 90 },
+        { name: "GitHub", level: 90 },
         { name: "CI/CD", level: 75 },
         { name: "Linux", level: 80 },
       ],
@@ -70,23 +92,30 @@ export const siteConfig = {
       id: "project-1",
       title: "Sniplynx",
       description:
-        "A mordern URL shortner with rich analytics and buisness insights",
-      image: "/images/projects/weather.jpg",
-      technologies: ["React", "Golang", "Gin", "PostgreSQL", "Docker", "Redis"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com/yourusername/weather",
+        "A modern URL shortener with rich analytics and business insights.",
+      image: "/images/projects/sniplynx.jpg",
+      technologies: ["React", "Go", "Gin", "PostgreSQL", "Docker", "Redis"],
       featured: true,
       underDevelopment: true,
     },
     {
       id: "project-2",
+      title: "MDM Service",
+      description:
+        "Master Data Platform exposing scalable REST APIs to manage and synchronize high-volume product master data across systems. Optimized MongoDB queries via indexing and tuning, cutting response time by 35%. Built automated data transformation pipelines with Slack webhook alerts for job monitoring.",
+      image: "/images/projects/mdm.jpg",
+      technologies: ["Node.js", "TypeScript", "MongoDB", "PostgreSQL"],
+      featured: true,
+    },
+    {
+      id: "project-3",
       title: "Portfolio",
       description:
         "A modern, responsive portfolio website built with React and Tailwind CSS.",
       image: "/images/projects/portfolio.jpg",
       technologies: ["React", "Tailwind CSS", "Vite"],
       liveUrl: "/",
-      githubUrl: "https://github.com/yourusername/portfolio",
+      githubUrl: "https://github.com/drcxd-6602/portfolio",
       featured: true,
     },
   ],
@@ -95,54 +124,60 @@ export const siteConfig = {
   experience: [
     {
       company: "Sarvaha Systems Pvt. Ltd.",
-      position: "Software Engineer",
-      period: "Jun 2024 - Present",
-      description: `Working as a Software Engineer on a large-scale Device Control and Monitoring system, building high-performance, concurrent backend services using C#, .NET 8, and ASP.NET Core utilizing SOLID principles and Design Patterns.
-
-        Utilizing frontend frameworks like Blazor and React to design data driven UI dashboards.
-        Contributing to system design and architectural decisions, with a focus on scalability and long-term maintainability.`,
+      position: "Software Developer",
+      period: "Jul 2024 - Present",
+      description: `Designed and developed a high-performance Device Control and Monitoring System using C#, .NET Core for real-time device communication and simulation.
+        Developed multi-threaded device plugins using async/await, concurrency patterns, and plugin architecture.
+        Implemented actor-based communication over gRPC for scalable distributed systems.
+        Built GraphQL and REST APIs using ASP.NET Core, and real-time dashboards using Blazor Server.
+        Implemented high-performance data access using Dapper and Entity Framework Core with MS SQL Server.
+        Delivered NUnit unit tests (80%+ coverage), applied SOLID principles and clean architecture, and contributed to system design and performance optimization.`,
       technologies: [
         "C#",
+        ".NET Core",
         "ASP.NET Core",
         "Blazor",
-        "React",
-        "TypeScript",
+        "gRPC",
+        "GraphQL",
+        "Dapper",
         "EF Core",
-        "LINQ",
-        "NUnit / xUnit",
-        "SQL",
+        "MS SQL",
+        "NUnit",
       ],
     },
     {
       company: "Sarvaha Systems Pvt. Ltd.",
       position: "Software Engineer Intern",
       period: "Jan 2024 - Jun 2024",
-      description: `
-        Developed a Node.js + TypeScript microservice for master data management, enabling faster and more reliable cross-service data synchronization.
-        Built automated, resilient data migration pipelines and optimized MongoDB aggregations/indexing, reducing API latency by ~40% under load.
-        Designed SQL-based data normalization and quality pipelines, cutting processing time by 25% and storage usage by 50%.
-        `,
+      description: `Developed a Node.js + TypeScript microservice for master data management and built automated scheduler pipelines for distributed data synchronization.
+        Optimized MongoDB queries and indexing, reducing API latency by 40% and improving query performance.
+        Designed and implemented SQL data pipelines for large-scale data processing, normalization, and data-quality validation.`,
       technologies: [
         "Node.js",
         "TypeScript",
         "MongoDB",
         "SQL",
-        "dbt",
-        "GCP / BigQuery",
+        "GCP BigQuery",
       ],
     },
   ],
 
   seo: {
-    title: "Darshan Chaudhari | Software Engineer",
+    title: "Darshan Chaudhari | Software Developer",
     description:
-      "Portfolio of Darshan Chaudhari - A Full Stack Developer specializing in C#, .Net, React, Node.js, and modern web technologies.",
+      "Portfolio of Darshan Chaudhari - Software Developer specializing in C#, .NET 8, ASP.NET Core, gRPC, GraphQL, Blazor, Node.js, and Go.",
     keywords: [
-      "developer",
+      "Darshan Chaudhari",
+      "software developer",
+      "C#",
+      ".NET",
+      "ASP.NET Core",
+      "Blazor",
+      "gRPC",
+      "GraphQL",
+      "React",
+      "Node.js",
       "portfolio",
-      "react",
-      "full stack",
-      "web development",
     ],
   },
 };
